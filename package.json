@@ -14,11 +14,9 @@
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "./bin/cli.js",
-  "files": [
-    "dist",
-    "bin"
-  ],
+  "bin": {
+    "imgblur": "./bin/cli.js",
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
