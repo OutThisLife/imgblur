@@ -11,11 +11,14 @@ import uglify from 'rollup-plugin-uglify'
 import ignore from 'rollup-plugin-ignore'
 
 const { dependencies } = require('./package.json')
+const { BABEL_ENV, NODE_ENV } = process.env
+const modules = BABEL_ENV === 'cjs' || NODE_ENV === 'test' ? 'commonjs' : false
+const loose = true
 
 // --
 
 const baseConfig = {
-  external: ['react', 'react-dom', 'styled-components'].concat(Object.keys(dependencies)),
+  external: ['react', 'react-dom'].concat(Object.keys(dependencies)),
   plugins: [
     flow({ pretty: true }),
     json(),
@@ -31,8 +34,25 @@ const baseConfig = {
       modulesOnly: true
     }),
     babel({
+      babelrc: false,
       exclude: 'node_modules/**',
-      plugins: ['external-helpers', 'react-require']
+      presets: [['env', { loose, modules }], 'react', 'flow'],
+      plugins: [
+        'external-helpers',
+        'react-require',
+        'transform-object-rest-spread',
+
+        [
+          'styled-components',
+          {
+            ssr: true,
+            displayName: true,
+            preprocess: false
+          }
+        ],
+
+        modules === 'commonjs' && 'add-module-exports'
+      ].filter(Boolean)
     }),
     replace({ __DEV__: JSON.stringify(false) })
   ]
@@ -55,8 +75,7 @@ const build = (input, name, output) => {
       interop: true,
       globals: {
         react: 'React',
-        'react-dom': 'ReactDOM',
-        styled: 'styled-components'
+        'react-dom': 'ReactDOM'
       }
     }
   }
@@ -158,4 +177,4 @@ const build = (input, name, output) => {
 
 // --
 
-export default build('./src/index.js', 'imgblur', './dist/imgblur')
+export default build('./src/index.js', 'imgblur', './dist/index')
