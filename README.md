@@ -1,6 +1,14 @@
-# ImgBlur ([demo](https://imgblur.herokuapp.com/))
+# ImgBlur
+
+[View Demo](https://imgblur.herokuapp.com/)
 
 Simple component coupled with a CLI that will lazy load your images w/ a blurry preview.
+
+## Install
+
+`
+yarn add imgblur --dev
+`
 
 ## Usage
 
