@@ -12,11 +12,11 @@ const quality = [25, 30]
 
 require('glob-fs')({ gitignore: true })
   .readdirSync(dir)
-  .filter(f => fs.lstatSync(f).isFile() && !f.includes('tiny'))
+  .filter(f => fs.lstatSync(f).isFile() && !f.includes('tblur'))
   .map(f => {
     const { name } = path.parse(f)
     const input = path.resolve(f)
-    const output = path.resolve(f.replace(name, `${name}-tiny`))
+    const output = path.resolve(f.replace(name, `${name}-tblur`))
 
     try {
       imagemin([input], null, {

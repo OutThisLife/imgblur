@@ -20,7 +20,7 @@ const Container = styled(({ bg, ...props }) => <span {...props} />).attrs({
     vertical-align: top;
     transition: opacity 0.4s ease-in-out;
 
-    &[src*='tiny'] {
+    &[src*='tblur'] {
       opacity: 0;
     }
   }
@@ -28,7 +28,7 @@ const Container = styled(({ bg, ...props }) => <span {...props} />).attrs({
 
 export default (compose(
   withProps(({ src }) => ({
-    bg: `${src.substr(0, src.lastIndexOf('.'))}-tiny${src.substr(src.lastIndexOf('.'), src.length)}`
+    bg: `${src.substr(0, src.lastIndexOf('.'))}-tblur${src.substr(src.lastIndexOf('.'), src.length)}`
   })),
   withState('src', 'setSrc', ''),
   withHandlers(() => ({
@@ -45,7 +45,7 @@ export default (compose(
           if (top <= innerHeight / 1.15 && top + height > 0) {
             const $img = new window.Image()
 
-            $img.src = bg.replace('-tiny', '')
+            $img.src = bg.replace('-tblur', '')
             $img.onload = () => setSrc(() => $img.src)
 
             window.removeEventListener('scroll', handleScroll)

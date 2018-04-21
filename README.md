@@ -4,7 +4,7 @@ Simple component coupled with a CLI that will lazy load your images w/ a blurry 
 
 ## Usage
 
-The CLI will generate the preview images for you (appended with -tiny):
+The CLI will generate the preview images for you (appended with -tblur):
 
 ```
 $ imgblur ./static/*.jpg
