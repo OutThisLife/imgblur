@@ -12,6 +12,7 @@ const Main = styled.main`
   padding: calc(var(--border) * 2);
 
   &:before {
+    z-index: 2;
     pointer-events: none;
     content: '';
     position: fixed;
