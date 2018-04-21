@@ -15,6 +15,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": "./bin/cli.js",
+  "files": [
+    "dist",
+    "bin"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
