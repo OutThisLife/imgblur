@@ -1,7 +1,8 @@
 {
   "name": "imgblur",
   "version": "1.0.12",
-  "description": "",
+  "description": "Simple component coupled with a CLI that will lazy load your images w/ a blurry preview.",
+  "repository": "https://github.com/OutThisLife/imgblur",
   "main": "dist/index.js",
   "scripts": {
     "start": "serve out/",
@@ -17,8 +18,12 @@
   "bin": {
     "imgblur": "./bin/cli.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "lazyload",
+    "lazy",
+    "image blur"
+  ],
+  "author": "Talasan Nicholson",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "latest",
