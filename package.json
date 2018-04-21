@@ -28,14 +28,15 @@
     "babel-preset-env": "latest",
     "babel-preset-flow": "latest",
     "babel-preset-react": "latest",
-    "eslint-plugin-flowtype-errors": "latest",
-    "eslint-plugin-flowtype": "latest",
-    "eslint-plugin-react": "latest",
     "eslint": "latest",
+    "eslint-plugin-flowtype": "latest",
+    "eslint-plugin-flowtype-errors": "latest",
+    "eslint-plugin-react": "latest",
     "flow-bin": "latest",
     "flow-copy-source": "latest",
     "next": "latest",
     "prettier": "latest",
+    "rollup": "latest",
     "rollup-plugin-babel": "latest",
     "rollup-plugin-commonjs": "latest",
     "rollup-plugin-flow": "latest",
@@ -44,8 +45,7 @@
     "rollup-plugin-node-globals": "latest",
     "rollup-plugin-node-resolve": "latest",
     "rollup-plugin-replace": "latest",
-    "rollup-plugin-uglify": "latest",
-    "rollup": "latest"
+    "rollup-plugin-uglify": "latest"
   },
   "dependencies": {
     "glob-fs": "^0.1.7",

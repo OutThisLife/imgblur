@@ -18,7 +18,7 @@ const loose = true
 // --
 
 const baseConfig = {
-  external: ['react', 'react-dom'].concat(Object.keys(dependencies)),
+  external: ['react', 'react-dom', 'styled-components'].concat(Object.keys(dependencies)),
   plugins: [
     flow({ pretty: true }),
     json(),
@@ -75,7 +75,8 @@ const build = (input, name, output) => {
       interop: true,
       globals: {
         react: 'React',
-        'react-dom': 'ReactDOM'
+        'react-dom': 'ReactDOM',
+        styled: 'styled-components'
       }
     }
   }

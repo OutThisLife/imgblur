@@ -3580,6 +3580,22 @@ imagemin@^5.3.1:
     pify "^2.3.0"
     replace-ext "^1.0.0"
 
+imgblur@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/imgblur/-/imgblur-1.0.1.tgz#6fc7c1221a317ce6e8332e54008454530642daba"
+  dependencies:
+    glob-fs "^0.1.7"
+    imagemin "^5.3.1"
+    imagemin-jpegtran "^5.0.2"
+    imagemin-mozjpeg "^7.0.0"
+    imagemin-pngquant "^5.1.0"
+    react "^16.3.2"
+    react-dom "^16.3.2"
+    recompose "^0.27.0"
+    serve "^6.5.5"
+    sharp "^0.20.1"
+    styled-components "^3.2.6"
+
 import-lazy@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-lazy/-/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
