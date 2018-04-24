@@ -1,6 +1,6 @@
 {
   "name": "imgblur",
-  "version": "0.1.1-0",
+  "version": "0.1.1",
   "description": "Simple component coupled with a CLI that will lazy load your images w/ a blurry preview.",
   "repository": "https://github.com/OutThisLife/imgblur",
   "main": "dist/index.js",
