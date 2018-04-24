@@ -39,6 +39,7 @@ export default (compose(
 
       const handleScroll = () => {
         if (ref instanceof HTMLImageElement) {
+          const $parent: HTMLElement = ref.parentElement
           const { innerHeight } = window
           const { top, height }: ClientRect = ref.getBoundingClientRect()
 
@@ -46,9 +47,9 @@ export default (compose(
             const $img = new window.Image()
 
             $img.src = bg.replace('-tblur', '')
-            $img.onload = () => setSrc(() => $img.src)
+            $img.onload = setSrc(() => $img.src, () => setTimeout(() => ($parent.style.background = 'none'), 400))
 
-            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('scroll', handleScroll, { passive: true })
           }
         }
       }
