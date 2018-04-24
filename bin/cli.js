@@ -11,20 +11,22 @@ const dir = args[0]
 const quality = [25, 30]
 
 const files = require('glob-fs')({ gitignore: true })
-  .readdirSync(dir)
-  .filter(f => fs.lstatSync(f).isFile() && !f.includes('tblur') && /(jpe?g|png)/.test(f))
+  .readdirSync(dir, { cwd: process.cwd() })
+  .filter(f => !f.includes('tblur') && /(jpe?g|png)/.test(f))
 
 if (files.length === 0) {
   console.log('ERROR: No files found. Try globbing, for ex: ./static/*.jpg')
 } else {
   files.map(f => {
-    const { name } = path.parse(f)
-    const input = path.resolve(f)
-    const output = path.resolve(f.replace(name, `${name}-tblur`))
+    const input = [...new Set(path.resolve(process.cwd(), f).split(path.sep))].join(path.sep)
+    const { name } = path.parse(input)
+    const output = input.replace(name, `${name}-tblur`)
 
     try {
       fs.lstatSync(output)
     } catch (e) {
+      console.log(`Creating sample of ${name}`)
+
       imagemin([input], null, {
         plugins: [mozjpeg({ quality }), pngquant({ quality })]
       }).then(buf => {
