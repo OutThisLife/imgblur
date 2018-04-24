@@ -61,10 +61,6 @@ const baseConfig = {
 const build = (input, name, output) => {
   const dir = path.dirname(path.dirname(input))
 
-  if (!name) {
-    return acc
-  }
-
   const base = {
     ...baseConfig,
     input,
