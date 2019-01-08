@@ -56,15 +56,15 @@
   },
   "dependencies": {
     "glob-fs": "^0.1.7",
-    "imagemin": "^5.3.1",
-    "imagemin-jpegtran": "^5.0.2",
-    "imagemin-mozjpeg": "^7.0.0",
-    "imagemin-pngquant": "^5.1.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "recompose": "^0.27.0",
-    "serve": "^6.5.5",
-    "sharp": "^0.20.1",
-    "styled-components": "^3.2.6"
+    "imagemin": "^6.1.0",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^6.0.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "recompose": "^0.30.0",
+    "serve": "^10.1.1",
+    "sharp": "^0.21.1",
+    "styled-components": "^4.1.3"
   }
 }
