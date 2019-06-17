@@ -52,7 +52,7 @@ export default ({ src: initialSrc, alt = '' }) => {
   return (
     <Container
       style={{
-        backgroundImage: src ? undefined : `url(${bg})`
+        backgroundImage: `url(${bg})`
       }}>
       <img ref={$img} src={src || bg} {...{ alt }} />
     </Container>
