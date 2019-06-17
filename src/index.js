@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
@@ -51,39 +50,12 @@ export default ({ src: initialSrc, alt = '' }) => {
   )
 
   return (
-    <>
-      <Head>
-        <title>ImgBlur</title>
-
-        <style jsx global>{`
-          body,
-          html {
-            margin: 0;
-            padding: 0;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-
-          img,
-          figure,
-          video,
-          iframe,
-          svg {
-            max-width: 100%;
-            margin: auto;
-          }
-        `}</style>
-      </Head>
-
-      <Container
-        style={{
-          backgroundImage: src ? undefined : `url(${bg})`
-        }}>
-        <img ref={$img} src={src || bg} {...{ alt }} />
-      </Container>
-    </>
+    <Container
+      style={{
+        backgroundImage: src ? undefined : `url(${bg})`
+      }}>
+      <img ref={$img} src={src || bg} {...{ alt }} />
+    </Container>
   )
 }
 
