@@ -1,6 +1,6 @@
 # ImgBlur
 
-[View Demo](https://imgblur.herokuapp.com/)
+[View Demo](https://imgblur.outthislife.now.sh/)
 
 Simple component coupled with a CLI that will lazy load your images w/ a blurry preview.
 
