@@ -1,14 +1,11 @@
 import path from 'path'
-
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+import ignore from 'rollup-plugin-ignore'
+import json from 'rollup-plugin-json'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import replace from 'rollup-plugin-replace'
-import commonjs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
-import json from 'rollup-plugin-json'
-import flow from 'rollup-plugin-flow'
-import flowCopySource from 'flow-copy-source'
 import uglify from 'rollup-plugin-uglify'
-import ignore from 'rollup-plugin-ignore'
 
 const { dependencies } = require('./package.json')
 const { BABEL_ENV, NODE_ENV } = process.env
@@ -20,7 +17,6 @@ const loose = true
 const baseConfig = {
   external: ['react', 'react-dom', 'styled-components'].concat(Object.keys(dependencies)),
   plugins: [
-    flow({ pretty: true }),
     json(),
     commonjs({
       include: ['node_modules/**'],
@@ -159,14 +155,6 @@ const build = (input, name, output) => {
       }),
       ignore(['stream'])
     )
-  }
-
-  try {
-    flowCopySource([path.resolve(dir, 'src')], path.resolve(dir, 'dist'), {
-      verbose: true
-    })
-  } catch (e) {
-    console.log('FLOW ERROR:', e)
   }
 
   return [devUmd, prodUmd, serverConfig, browserConfig]

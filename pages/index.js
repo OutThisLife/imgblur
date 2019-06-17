@@ -1,5 +1,3 @@
-// @flow
-import { pure } from 'recompose'
 import styled from 'styled-components'
 
 import ImgBlur from '../src'
@@ -38,7 +36,7 @@ const Main = styled.main`
   }
 `
 
-export default pure(() => (
+export default () => (
   <Main>
     <h1>ImgBlur</h1>
     <code>&lt;ImgBlur src='/static/sample.jpg' /&gt;</code>
@@ -47,4 +45,4 @@ export default pure(() => (
 
     {['sample.jpg', 'tms.jpg', 'wp2233419.jpg'].map(f => <ImgBlur key={f} src={`/static/${f}`} />)}
   </Main>
-))
+)

@@ -1,18 +1,10 @@
-// @flow
-import { compose, withProps, withState, withHandlers, type HOC } from 'recompose'
+import Head from 'next/head'
+import { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
-type Props = {
-  src: string,
-  alt?: string
-}
-
-const Container = styled(({ bg, ...props }) => <span {...props} />).attrs({
-  style: ({ bg }) => ({
-    background: `url(${bg}) center / cover no-repeat`
-  })
-})`
+const Container = styled.span`
   display: inline-block;
+  background: center / cover no-repeat;
 
   img {
     max-width: 100%;
@@ -26,40 +18,74 @@ const Container = styled(({ bg, ...props }) => <span {...props} />).attrs({
   }
 `
 
-export default (compose(
-  withProps(({ src }) => ({
-    bg: `${src.substr(0, src.lastIndexOf('.'))}-tblur${src.substr(src.lastIndexOf('.'), src.length)}`
-  })),
-  withState('src', 'setSrc', ''),
-  withHandlers(() => ({
-    onRef: ({ bg, setSrc }) => (ref: ?HTMLImageElement) => {
-      if (!ref) {
+export default ({ src: initialSrc, alt = '' }) => {
+  const $img = useRef()
+  const [src, setSrc] = useState()
+  const bg = getBg(initialSrc)
+
+  useLayoutEffect(
+    () => {
+      if (!($img.current instanceof HTMLImageElement)) {
         return
       }
 
-      const handleScroll = () => {
-        if (ref instanceof HTMLImageElement) {
-          const $parent: HTMLElement = ref.parentElement
-          const { innerHeight } = window
-          const { top, height }: ClientRect = ref.getBoundingClientRect()
+      const o = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) {
+            o.unobserve($img.current)
 
-          if (top <= innerHeight / 1.15 && top + height > 0) {
-            const $img = new window.Image()
-
-            $img.src = bg.replace('-tblur', '')
-            $img.onload = setSrc(() => $img.src, () => setTimeout(() => ($parent.style.background = 'none'), 400))
-
-            window.removeEventListener('scroll', handleScroll, { passive: true })
+            const im = new Image()
+            im.src = bg.replace('-tblur', '')
+            im.onload = () => setSrc(im.src)
           }
+        },
+        {
+          threshold: 0.5
         }
-      }
+      )
 
-      window.requestAnimationFrame(handleScroll)
-      window.addEventListener('scroll', handleScroll, { passive: true })
-    }
-  }))
-): HOC<*, Props>)(({ onRef, bg, src, alt = '' }) => (
-  <Container bg={bg}>
-    <img ref={onRef} src={src || bg} alt={alt} />
-  </Container>
-))
+      o.observe($img.current)
+      return () => o.unobserve($img.current)
+    },
+    [$img]
+  )
+
+  return (
+    <>
+      <Head>
+        <title>ImgBlur</title>
+
+        <style jsx global>{`
+          body,
+          html {
+            margin: 0;
+            padding: 0;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+
+          img,
+          figure,
+          video,
+          iframe,
+          svg {
+            max-width: 100%;
+            margin: auto;
+          }
+        `}</style>
+      </Head>
+
+      <Container
+        style={{
+          backgroundImage: src ? undefined : `url(${bg})`
+        }}>
+        <img ref={$img} src={src || bg} {...{ alt }} />
+      </Container>
+    </>
+  )
+}
+
+const getBg = (src = '') =>
+  src.includes('.') && `${src.substr(0, src.lastIndexOf('.'))}-tblur${src.substr(src.lastIndexOf('.'), src.length)}`
