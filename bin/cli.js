@@ -14,7 +14,7 @@ const files = require('glob-fs')({ gitignore: true })
   .readdirSync(dir, { cwd: process.cwd() })
   .filter(f => !f.includes('tblur') && /(jpe?g|png)/.test(f))
 
-if (files.length === 0) {
+if (!files.length) {
   console.log('ERROR: No files found. Try globbing, for ex: ./static/*.jpg')
 } else {
   files.map(f => {
@@ -29,11 +29,11 @@ if (files.length === 0) {
 
       imagemin([input], null, {
         plugins: [mozjpeg({ quality }), pngquant({ quality })]
-      }).then(buf => {
+      }).then(buf =>
         sharp(Buffer.from(buf[0].data))
           .blur(100)
           .toFile(output)
-      })
+      )
     }
   })
 }
